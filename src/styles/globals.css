@@ -1,0 +1,309 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-sans bg-gray-50 text-gray-900;
+    line-height: 1.5;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500;
+  }
+}
+
+@layer components {
+  /* Page Layout */
+  .app-sidebar {
+    @apply fixed left-0 top-0 h-screen bg-black text-white flex flex-col z-40;
+    width: 220px;
+    transition: width 0.25s ease, transform 0.25s ease;
+  }
+
+  .app-sidebar.collapsed {
+    width: 64px;
+  }
+
+  .app-content {
+    margin-left: 220px;
+    min-height: 100vh;
+    transition: margin-left 0.25s ease;
+  }
+
+  .app-content.sidebar-collapsed {
+    margin-left: 64px;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white rounded-lg border border-gray-200 shadow-card;
+  }
+
+  .card-hover {
+    @apply transition-shadow duration-200 hover:shadow-card-hover;
+  }
+
+  .bento-card {
+    @apply card p-5;
+  }
+
+  /* Stat Cards */
+  .stat-card {
+    @apply bento-card card-hover;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-medium rounded-md
+           transition-all duration-150 cursor-pointer select-none whitespace-nowrap;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent text-white hover:bg-accent-dark active:scale-95;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .btn-secondary {
+    @apply btn bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 active:scale-95;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-50 text-red-600 border border-red-200 hover:bg-red-100 active:scale-95;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .btn-sm {
+    padding: 5px 12px !important;
+    font-size: 12px !important;
+  }
+
+  .btn-lg {
+    padding: 12px 24px !important;
+    font-size: 15px !important;
+  }
+
+  .btn-icon {
+    @apply btn p-2 rounded-md;
+  }
+
+  /* Inputs */
+  .input {
+    @apply w-full bg-white border border-gray-200 rounded-md text-sm text-gray-900
+           placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-accent/30
+           focus:border-accent transition-all duration-150;
+    padding: 8px 12px;
+  }
+
+  .input-label {
+    @apply block text-xs font-medium text-gray-600 mb-1.5;
+  }
+
+  /* Tables */
+  .data-table {
+    @apply w-full text-sm;
+  }
+
+  .data-table thead tr {
+    @apply border-b border-gray-200;
+  }
+
+  .data-table th {
+    @apply text-xs font-semibold text-gray-500 uppercase tracking-wide text-left py-3 px-4;
+  }
+
+  .data-table tbody tr {
+    @apply border-b border-gray-100 hover:bg-gray-50/60 transition-colors duration-100;
+  }
+
+  .data-table td {
+    @apply py-3 px-4 text-gray-700;
+  }
+
+  /* Status Badges */
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full font-medium;
+    padding: 2px 10px;
+    font-size: 11px;
+  }
+
+  .badge-green {
+    @apply badge bg-accent-muted text-green-700;
+  }
+
+  .badge-red {
+    @apply badge bg-red-50 text-red-600;
+  }
+
+  .badge-yellow {
+    @apply badge bg-amber-50 text-amber-700;
+  }
+
+  .badge-gray {
+    @apply badge bg-gray-100 text-gray-600;
+  }
+
+  .badge-blue {
+    @apply badge bg-blue-50 text-blue-600;
+  }
+
+  /* Navigation items */
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium
+           text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-150 cursor-pointer;
+  }
+
+  .nav-item.active {
+    @apply bg-accent/15 text-accent;
+  }
+
+  /* Page header */
+  .page-header {
+    @apply mb-6;
+  }
+
+  .page-title {
+    @apply text-2xl font-bold text-gray-900 tracking-tight;
+  }
+
+  .page-subtitle {
+    @apply text-sm text-gray-500 mt-1;
+  }
+
+  /* Section */
+  .section-title {
+    @apply text-base font-semibold text-gray-900;
+  }
+
+  /* Divider */
+  .divider {
+    @apply border-t border-gray-200 my-4;
+  }
+
+  /* Toggle */
+  .toggle {
+    @apply relative inline-flex items-center cursor-pointer;
+  }
+
+  .toggle input {
+    @apply sr-only;
+  }
+
+  .toggle-track {
+    @apply w-10 h-5 bg-gray-200 rounded-full transition-colors duration-200;
+  }
+
+  .toggle input:checked + .toggle-track {
+    @apply bg-accent;
+  }
+
+  .toggle-thumb {
+    @apply absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full shadow transition-transform duration-200;
+  }
+
+  .toggle input:checked ~ .toggle-thumb {
+    @apply translate-x-5;
+  }
+}
+
+/* Mobile sidebar overlay */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 35;
+  backdrop-filter: blur(2px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease forwards;
+}
+
+.animate-slide-in {
+  animation: slideInLeft 0.25s ease forwards;
+}
+
+/* Chart tooltip override */
+.recharts-tooltip-wrapper {
+  outline: none !important;
+}
+
+.recharts-default-tooltip {
+  border: 1px solid #E5E7EB !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: 12px !important;
+}
+
+/* Print Styles for Bills and Receipts */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide app navigation, sidebar, topbar, background overlays, actions */
+  nav, aside, header, .sidebar-overlay, .print\:hidden, button, [role="dialog"] > div:first-child {
+    display: none !important;
+  }
+
+  /* Modal container becomes standard block */
+  .fixed {
+    position: static !important;
+  }
+
+  /* Ensure printable area is full width and cleanly displayed */
+  #printable-bill, #printable-receipt {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+}
+

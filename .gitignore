@@ -1,0 +1,29 @@
+# Local Environment and Secrets
+.env
+.env.local
+.env.*.local
+
+# Node dependencies and build
+node_modules/
+dist/
+dist-ssr/
+*.local
+tsconfig.tsbuildinfo
+dev_server.log
+
+# Java and Maven build
+backend/target/
+*.class
+*.jar
+*.war
+
+# IDE and System files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
